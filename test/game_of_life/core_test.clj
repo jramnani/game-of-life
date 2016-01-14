@@ -4,7 +4,6 @@
 
 (deftest create-a-game-board
   (let [board (create-board 5 5)]
-    (prn "DEBUG: " board)
     (testing "A 5x5 board has 5 rows."
       (is (= 5 (count board))))
     (testing "A 5x5 board has 5 columns."
