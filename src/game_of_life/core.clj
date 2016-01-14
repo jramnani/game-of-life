@@ -11,6 +11,12 @@
         board (vec (repeat num-rows row))]
     board))
 
+(defn get-neighbors
+  "Get the neighbors for a given cell. The cell is determined by X and
+  Y coordinates on a 2d vector board."
+  [board x y]
+  (vec (repeat 8 nil)))
+
 (defn display-board-terminal
   "Print the board to a terminal."
   [board]
