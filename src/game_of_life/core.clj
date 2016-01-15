@@ -19,9 +19,19 @@
 
 (defn get-neighbors
   "Get the neighbors for a given cell. The cell is determined by X and
-  Y coordinates on a 2d vector board."
-  [board x y]
-  (vec (repeat 8 nil)))
+  Y coordinates on a 2d vector board.
+  Returns a vector of neighbor cells."
+  [x y board]
+  (let [top (get-cell x (- y 1) board)
+        bottom (get-cell x (+ y 1) board)
+        left (get-cell (- x 1) y board)
+        right (get-cell (+ x 1) y board)
+        top-left (get-cell (- x 1) (+ y 1) board)
+        top-right (get-cell (+ x 1) (+ y 1) board)
+        bottom-left (get-cell (- x 1) (- y 1) board)
+        bottom-right (get-cell (+ x 1) (- y 1) board)]
+    ; Return a vector of all the neighbors in clockwise order.
+    [top top-right right bottom-right bottom bottom-left left top-left]))
 
 (defn display-board-terminal
   "Print the board to a terminal."
