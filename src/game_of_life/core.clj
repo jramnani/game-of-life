@@ -20,7 +20,8 @@
 (defn display-board-terminal
   "Print the board to a terminal."
   [board]
-  (map println board))
+  (dorun
+   (map println board)))
 
 (defn -main []
   (display-board-terminal (create-board columns rows)))
