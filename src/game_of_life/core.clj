@@ -11,6 +11,12 @@
         board (vec (repeat num-rows row))]
     board))
 
+(defn get-cell
+    "Get the value of a cell at position x and y on the board."
+  [x y board]
+  (let [row (nth board y)]
+    (nth row x)))
+
 (defn get-neighbors
   "Get the neighbors for a given cell. The cell is determined by X and
   Y coordinates on a 2d vector board."
