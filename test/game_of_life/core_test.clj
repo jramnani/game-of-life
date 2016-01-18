@@ -43,6 +43,16 @@
     (testing "index-below should wrap around from the bottom to the top."
       (is (= top (index-below bottom board))))))
 
+(deftest index-left-test
+  (let [board [[true false]]
+        left 0
+        right 1]
+    (testing "index-left should return the index of (x - 1) on the board."
+      (is (= left (index-left right board))))
+
+    (testing "index-left should wrap around from the left to the right."
+      (is (= right (index-left left board))))))
+
 (deftest index-right-test
   (let [board [[true false]]
         left 0

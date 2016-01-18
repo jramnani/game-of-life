@@ -31,6 +31,14 @@
     0 ;; wrap around to the top of the board.
     (inc y)))
 
+(defn index-left
+  [x board]
+  (let [row (first board)]
+    (if (<= x 0)
+      (dec (count row))
+      (dec x)))
+  )
+
 (defn index-right
   [x board]
   (let [row (first board)]
