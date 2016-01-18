@@ -47,3 +47,10 @@
       (is (= true (become-alive? (get-neighbors 1 1 alive-board)))))
     (testing "If a dead cell has two alive neighbors it is still dead."
       (is (= false (become-alive? (get-neighbors 1 1 dead-board)))))))
+
+(deftest dead-cell-test
+  (let [no-alive-neighbors-board [[false false false]
+                                  [false true  false]
+                                  [false false false]]]
+    (testing "A cell dies if it has no living neighbors."
+      (= true (stay-alive? (get-neighbors 1 1 no-alive-neighbors-board))))))
