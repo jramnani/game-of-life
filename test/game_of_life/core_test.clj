@@ -14,13 +14,6 @@
     (testing "Get the value of the middle cell of the board."
       (is (= false (get-cell 3 3 board))))))
 
-(deftest get-neighbors-for-middle-cell
-  ; On a 5x5 board let's test the middle cell. It's the easiest place on
-  ; the board to test because it doesn't overlap any edges on the board.
-  (let [board (create-board 5 5)]
-    (testing "A cell should have 8 neighbors."
-      (is (= 8 (count (get-neighbors 3 3 board)))))))
-
 (deftest index-above-test
   (let [board [[true]
                [false]]
@@ -62,6 +55,38 @@
 
     (testing "index-right should wrap around the board."
       (is (= left (index-right right board))))))
+
+(deftest get-neighbors-for-middle-cell-test
+  ; On a 5x5 board let's test the middle cell. It's the easiest place on
+  ; the board to test because it doesn't overlap any edges on the board.
+  (let [board (create-board 5 5)]
+    (testing "A cell should have 8 neighbors."
+      (is (= 8 (count (get-neighbors 3 3 board)))))))
+
+(deftest get-neighbors-for-edge-cell-test
+  (let [board [[true  true  true]
+               [false false false]
+               [true  true  true]]]
+    (testing "A cell on the top edge has 8 neighbors."
+      (is (= 8 (count (get-neighbors 1 0 board)))))
+
+    (testing "The top-middle cell has 5 neighbors alive."
+      (is (= 5 (count (filter alive? (get-neighbors 1 0 board))))))
+
+    (testing "The right-middle cell has 6 neighbors alive."
+      (is (= 6 (count (filter alive? (get-neighbors 2 1 board))))))
+
+    (testing "The bottom-middle cell has 5 neighbors alive."
+      (is (= 5 (count (filter alive? (get-neighbors 1 2 board))))))
+
+    (testing "The left-middle cell has 6 neighbors alive."
+      (is (= 6 (count (filter alive? (get-neighbors 0 1 board))))))
+
+    (testing "The top-left cell has 6 neighbors alive."
+      (is (= 5 (count (filter alive? (get-neighbors 0 0 board))))))
+
+    (testing "The bottom-right cell has 5 neighbors alive."
+      (is (= 5 (count (filter alive? (get-neighbors 2 2 board))))))))
 
 (deftest living-cell-test
   (let [two-alive-neighbors [true true

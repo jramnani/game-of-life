@@ -52,13 +52,21 @@
   Returns a vector of neighbor cells."
   [x y board]
   (let [top (get-cell x (index-above y board) board)
-        bottom (get-cell x (+ y 1) board)
-        left (get-cell (- x 1) y board)
-        right (get-cell (+ x 1) y board)
-        top-left (get-cell (- x 1) (+ y 1) board)
-        top-right (get-cell (+ x 1) (+ y 1) board)
-        bottom-left (get-cell (- x 1) (- y 1) board)
-        bottom-right (get-cell (+ x 1) (- y 1) board)]
+        bottom (get-cell x (index-below y board) board)
+        left (get-cell (index-left x board) y board)
+        right (get-cell (index-right x board) y board)
+        top-left (get-cell (index-left x board)
+                           (index-above y board)
+                           board)
+        top-right (get-cell (index-right x board)
+                            (index-above y board)
+                            board)
+        bottom-left (get-cell (index-left x board)
+                              (index-below y board)
+                              board)
+        bottom-right (get-cell (index-right x board)
+                               (index-below y board)
+                               board)]
     ; Return a vector of all the neighbors in clockwise order.
     [top top-right right bottom-right bottom bottom-left left top-left]))
 
