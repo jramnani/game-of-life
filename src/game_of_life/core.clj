@@ -35,7 +35,9 @@
 
 (defn is-alive?
   [cells]
-  true)
+  (let [alive-neighbors (count (filter true? cells))]
+    (or (= 2 alive-neighbors)
+        (= 3 alive-neighbors))))
 
 (defn display-board-terminal
   "Print the board to a terminal."
