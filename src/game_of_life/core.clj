@@ -11,6 +11,8 @@
         board (vec (repeat num-rows row))]
     board))
 
+(def alive? true?)
+
 (defn get-cell
     "Get the value of a cell at position x and y on the board."
   [x y board]
@@ -35,12 +37,12 @@
 
 (defn become-alive?
   [cells]
-  (let [alive-neighbors (count (filter true? cells))]
+  (let [alive-neighbors (count (filter alive? cells))]
     (= 3 alive-neighbors)))
 
 (defn stay-alive?
   [cells]
-  (let [alive-neighbors (count (filter true? cells))]
+  (let [alive-neighbors (count (filter alive? cells))]
     (or (= 2 alive-neighbors)
         (= 3 alive-neighbors))))
 
