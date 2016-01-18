@@ -125,3 +125,14 @@
                             false false false false]]
     (testing "A cell dies if it has no living neighbors."
       (= true (stay-alive? no-alive-neighbors)))))
+
+
+(deftest next-iteration-test
+  (let [first-board [[false false false]
+                     [false true  true]
+                     [false true  false]]
+        next-board [[false false false]
+                    [false true  true]
+                    [false true  true]]]
+    (testing "Cells evolve from one iteration to the next."
+      (is (= next-board (next-iteration first-board))))))

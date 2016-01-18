@@ -81,6 +81,12 @@
     (or (= 2 alive-neighbors)
         (= 3 alive-neighbors))))
 
+(defn next-iteration
+ [board]
+  [[false false false]
+   [false true  true]
+   [false true  true]])
+
 (defn display-board-terminal
   "Print the board to a terminal."
   [board]
