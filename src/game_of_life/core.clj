@@ -34,8 +34,7 @@
   (let [row (first board)]
     (if (<= x 0)
       (dec (count row))
-      (dec x)))
-  )
+      (dec x))))
 
 (defn index-right
   [x board]
