@@ -31,7 +31,7 @@
                            [false true  false]]]
 
     (testing "A cell that is alive should stay alive if two of its neighbors are alive."
-      (is (= true (is-alive? (get-neighbors 1 1 two-alive-board)))))
+      (is (= true (stay-alive? (get-neighbors 1 1 two-alive-board)))))
 
     (testing "A cell that is alive should stay alive if three of its neighbors are alive."
-      (is (= true (is-alive? (get-neighbors 1 1 three-alive-board)))))))
+      (is (= true (stay-alive? (get-neighbors 1 1 three-alive-board)))))))
