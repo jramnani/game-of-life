@@ -33,6 +33,11 @@
     ; Return a vector of all the neighbors in clockwise order.
     [top top-right right bottom-right bottom bottom-left left top-left]))
 
+(defn become-alive?
+  [cells]
+  (let [alive-neighbors (count (filter true? cells))]
+    (= 3 alive-neighbors)))
+
 (defn stay-alive?
   [cells]
   (let [alive-neighbors (count (filter true? cells))]

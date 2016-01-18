@@ -35,3 +35,15 @@
 
     (testing "A cell that is alive should stay alive if three of its neighbors are alive."
       (is (= true (stay-alive? (get-neighbors 1 1 three-alive-board)))))))
+
+(deftest cell-becomes-alive-test
+  (let [alive-board [[false true  false]
+                     [false true  true]
+                     [false true  false]]
+        dead-board [[false false false]
+                    [false true  true]
+                    [false false false]]]
+    (testing "If a cell is dead then it becomes alive if it has three alive neighbors."
+      (is (= true (become-alive? (get-neighbors 1 1 alive-board)))))
+    (testing "If a dead cell has two alive neighbors it is still dead."
+      (is (= false (become-alive? (get-neighbors 1 1 dead-board)))))))
