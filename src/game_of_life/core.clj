@@ -33,6 +33,10 @@
     ; Return a vector of all the neighbors in clockwise order.
     [top top-right right bottom-right bottom bottom-left left top-left]))
 
+(defn is-alive?
+  [cells]
+  true)
+
 (defn display-board-terminal
   "Print the board to a terminal."
   [board]

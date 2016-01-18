@@ -21,3 +21,17 @@
     (testing "A cell should have 8 neighbors."
       (is (= 8 (count (get-neighbors 3 3 board)
                       ))))))
+
+(deftest living-cell-test
+  (let [two-alive-board [[false true  false]
+                         [false true  true ]
+                         [false false false]]
+        three-alive-board [[false true  false]
+                           [false true  true]
+                           [false true  false]]]
+
+    (testing "A cell that is alive should stay alive if two of its neighbors are alive."
+      (is (= true (is-alive? (get-neighbors 1 1 two-alive-board)))))
+
+    (testing "A cell that is alive should stay alive if three of its neighbors are alive."
+      (is (= true (is-alive? (get-neighbors 1 1 three-alive-board)))))))
