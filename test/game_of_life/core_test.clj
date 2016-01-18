@@ -19,8 +19,18 @@
   ; the board to test because it doesn't overlap any edges on the board.
   (let [board (create-board 5 5)]
     (testing "A cell should have 8 neighbors."
-      (is (= 8 (count (get-neighbors 3 3 board)
-                      ))))))
+      (is (= 8 (count (get-neighbors 3 3 board)))))))
+
+(deftest index-above-test
+  (let [board [[true]
+               [false]]
+        top 0
+        bottom 1]
+    (testing "index-above should return the index of cell (y - 1) on the board."
+      (is  (= top (index-above bottom board))))
+
+    (testing "index-above should wrap around from the top to the bottom."
+      (is (= bottom (index-above top board))))))
 
 (deftest living-cell-test
   (let [two-alive-neighbors [true true
