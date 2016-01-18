@@ -11,8 +11,6 @@
         board (vec (repeat num-rows row))]
     board))
 
-(def alive? true?)
-
 (defn get-cell
     "Get the value of a cell at position x and y on the board."
   [x y board]
@@ -69,6 +67,8 @@
                                board)]
     ; Return a vector of all the neighbors in clockwise order.
     [top top-right right bottom-right bottom bottom-left left top-left]))
+
+(def alive? true?)
 
 (defn become-alive?
   [cells]
