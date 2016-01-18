@@ -25,6 +25,12 @@
     (dec (count board)) ;; wrap around to the bottom of the board.
     (dec y)))
 
+(defn index-below
+  [y board]
+  (if (>= y (dec (count board)))
+    0 ;; wrap around to the top of the board.
+    (inc y)))
+
 (defn get-neighbors
   "Get the neighbors for a given cell. The cell is determined by X and
   Y coordinates on a 2d vector board.

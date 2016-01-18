@@ -32,6 +32,17 @@
     (testing "index-above should wrap around from the top to the bottom."
       (is (= bottom (index-above top board))))))
 
+(deftest index-below-test
+  (let [board [[true]
+               [false]]
+        top 0
+        bottom 1]
+    (testing "index-below should return the index of cell (y + 1) on the board."
+      (is (= bottom (index-below top board))))
+
+    (testing "index-below should wrap around from the bottom to the top."
+      (is (= top (index-below bottom board))))))
+
 (deftest living-cell-test
   (let [two-alive-neighbors [true true
                          false false false false false false]
