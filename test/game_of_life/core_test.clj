@@ -23,34 +23,29 @@
                       ))))))
 
 (deftest living-cell-test
-  (let [two-alive-board [[false true  false]
-                         [false true  true ]
-                         [false false false]]
-        three-alive-board [[false true  false]
-                           [false true  true]
-                           [false true  false]]]
+  (let [two-alive-neighbors [true true
+                         false false false false false false]
+        three-alive-neighbors [true true true
+                           false false false false false]]
 
     (testing "A cell that is alive should stay alive if two of its neighbors are alive."
-      (is (= true (stay-alive? (get-neighbors 1 1 two-alive-board)))))
+      (is (= true (stay-alive? two-alive-neighbors))))
 
     (testing "A cell that is alive should stay alive if three of its neighbors are alive."
-      (is (= true (stay-alive? (get-neighbors 1 1 three-alive-board)))))))
+      (is (= true (stay-alive? three-alive-neighbors))))))
 
 (deftest cell-becomes-alive-test
-  (let [alive-board [[false true  false]
-                     [false true  true]
-                     [false true  false]]
-        dead-board [[false false false]
-                    [false true  true]
-                    [false false false]]]
+  (let [alive-neighbors [true  true  true
+                         false false false false false]
+        dead-neighbors [true  true
+                        false false false false false false]]
     (testing "If a cell is dead then it becomes alive if it has three alive neighbors."
-      (is (= true (become-alive? (get-neighbors 1 1 alive-board)))))
+      (is (= true (become-alive? alive-neighbors))))
     (testing "If a dead cell has two alive neighbors it is still dead."
-      (is (= false (become-alive? (get-neighbors 1 1 dead-board)))))))
+      (is (= false (become-alive? dead-neighbors))))))
 
 (deftest dead-cell-test
-  (let [no-alive-neighbors-board [[false false false]
-                                  [false true  false]
-                                  [false false false]]]
+  (let [no-alive-neighbors [true false false false
+                            false false false false]]
     (testing "A cell dies if it has no living neighbors."
-      (= true (stay-alive? (get-neighbors 1 1 no-alive-neighbors-board))))))
+      (= true (stay-alive? no-alive-neighbors)))))
