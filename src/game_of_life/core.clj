@@ -31,12 +31,19 @@
     0 ;; wrap around to the top of the board.
     (inc y)))
 
+(defn index-right
+  [x board]
+  (let [row (first board)]
+    (if (>= x (dec (count row)))
+      0 ;; wrap around to the first column.
+      (inc x))))
+
 (defn get-neighbors
   "Get the neighbors for a given cell. The cell is determined by X and
   Y coordinates on a 2d vector board.
   Returns a vector of neighbor cells."
   [x y board]
-  (let [top (get-cell x (- y 1) board)
+  (let [top (get-cell x (index-above y board) board)
         bottom (get-cell x (+ y 1) board)
         left (get-cell (- x 1) y board)
         right (get-cell (+ x 1) y board)

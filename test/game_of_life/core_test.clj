@@ -43,6 +43,16 @@
     (testing "index-below should wrap around from the bottom to the top."
       (is (= top (index-below bottom board))))))
 
+(deftest index-right-test
+  (let [board [[true false]]
+        left 0
+        right 1]
+    (testing "index-right should return the index of cell (x + 1) on the board."
+      (is (= right (index-right left board))))
+
+    (testing "index-right should wrap around the board."
+      (is (= left (index-right right board))))))
+
 (deftest living-cell-test
   (let [two-alive-neighbors [true true
                          false false false false false false]
