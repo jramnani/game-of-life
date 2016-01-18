@@ -9,10 +9,12 @@
     (testing "A 5x5 board has 5 columns."
       (is (= 5 (count (first board)))))))
 
+
 (deftest get-cell-test
   (let [board (create-board 5 5)]
     (testing "Get the value of the middle cell of the board."
       (is (= false (get-cell 3 3 board))))))
+
 
 (deftest index-above-test
   (let [board [[true]
@@ -25,6 +27,7 @@
     (testing "index-above should wrap around from the top to the bottom."
       (is (= bottom (index-above top board))))))
 
+
 (deftest index-below-test
   (let [board [[true]
                [false]]
@@ -36,6 +39,7 @@
     (testing "index-below should wrap around from the bottom to the top."
       (is (= top (index-below bottom board))))))
 
+
 (deftest index-left-test
   (let [board [[true false]]
         left 0
@@ -45,6 +49,7 @@
 
     (testing "index-left should wrap around from the left to the right."
       (is (= right (index-left left board))))))
+
 
 (deftest index-right-test
   (let [board [[true false]]
@@ -56,12 +61,14 @@
     (testing "index-right should wrap around the board."
       (is (= left (index-right right board))))))
 
+
 (deftest get-neighbors-for-middle-cell-test
   ; On a 5x5 board let's test the middle cell. It's the easiest place on
   ; the board to test because it doesn't overlap any edges on the board.
   (let [board (create-board 5 5)]
     (testing "A cell should have 8 neighbors."
       (is (= 8 (count (get-neighbors 3 3 board)))))))
+
 
 (deftest get-neighbors-for-edge-cell-test
   (let [board [[true  true  true]
@@ -88,6 +95,7 @@
     (testing "The bottom-right cell has 5 neighbors alive."
       (is (= 5 (count (filter alive? (get-neighbors 2 2 board))))))))
 
+
 (deftest living-cell-test
   (let [two-alive-neighbors [true true
                          false false false false false false]
@@ -100,6 +108,7 @@
     (testing "A cell that is alive should stay alive if three of its neighbors are alive."
       (is (= true (stay-alive? three-alive-neighbors))))))
 
+
 (deftest cell-becomes-alive-test
   (let [alive-neighbors [true  true  true
                          false false false false false]
@@ -109,6 +118,7 @@
       (is (= true (become-alive? alive-neighbors))))
     (testing "If a dead cell has two alive neighbors it is still dead."
       (is (= false (become-alive? dead-neighbors))))))
+
 
 (deftest dead-cell-test
   (let [no-alive-neighbors [true false false false
