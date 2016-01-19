@@ -80,6 +80,12 @@
     (or (= 2 alive-neighbors)
         (= 3 alive-neighbors))))
 
+(defn eval-cell
+  [x y board]
+  (let [neighbors (get-neighbors x y board)]
+    (or (become-alive? neighbors)
+        (stay-alive? neighbors))))
+
 (defn next-iteration
  [board]
   [[false false false]

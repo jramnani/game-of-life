@@ -121,11 +121,22 @@
 
 
 (deftest dead-cell-test
-  (let [no-alive-neighbors [true false false false
-                            false false false false]]
+  (let [no-alive-neighbors [true
+                            false false false false false false false]]
     (testing "A cell dies if it has no living neighbors."
       (= true (stay-alive? no-alive-neighbors)))))
 
+(deftest eval-cell-test
+  (let [alive-board [[false false false]
+                     [false true  true]
+                     [false true  false]]
+        dead-board [[false false false]
+                    [false true  false]
+                    [false false false]]]
+    (testing "A cell with three alive neighbors should come alive."
+      (is (= true (eval-cell 2 2 alive-board))))
+    (testing "A cell with no alive neighbors should die."
+      (is (= false (eval-cell 1 1 dead-board))))))
 
 (deftest next-iteration-test
   (let [first-board [[false false false]
