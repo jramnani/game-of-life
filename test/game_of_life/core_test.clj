@@ -122,9 +122,13 @@
 
 (deftest dead-cell-test
   (let [no-alive-neighbors [true
-                            false false false false false false false]]
+                            false false false false false false false]
+        overpopulated-neighbors [true true true true
+                                 false false false false false]]
     (testing "A cell dies if it has no living neighbors."
-      (= true (stay-alive? no-alive-neighbors)))))
+      (= true (stay-alive? no-alive-neighbors)))
+    (testing "A cell dies of overpopulation with more than 3 live neighbors."
+      (= false (stay-alive? overpopulated-neighbors)))))
 
 (deftest eval-cell-test
   (let [alive-board [[false false false]
