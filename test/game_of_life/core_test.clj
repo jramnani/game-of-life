@@ -176,3 +176,13 @@
 
     (testing "A 'blinker' oscillates between a horizontal and vertical row of cells."
       (is (= first-board (next-iteration (next-iteration first-board)))))))
+
+(deftest square-test
+  (let [board [[false false false false false]
+               [false true  true false false]
+               [false true  true false false]
+               [false false false false false]
+               [false false false false false]]]
+    (testing "A 'square' should stay the same after each iteration."
+      (is (= board (next-iteration board)))
+      (is (= board (next-iteration (next-iteration board)))))))
