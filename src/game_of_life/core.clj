@@ -67,22 +67,10 @@
     ; Return a vector of all the neighbors in clockwise order.
     [top top-right right bottom-right bottom bottom-left left top-left]))
 
-(def alive? true?)
-(def dead? false?)
-
-(defn become-alive?
-  [cells]
-  (let [alive-neighbors (count (filter alive? cells))]
-    (= 3 alive-neighbors)))
-
-(defn stay-alive?
-  [cells]
-  (let [alive-neighbors (count (filter alive? cells))]
-    (or (= 2 alive-neighbors)
-        (= 3 alive-neighbors))))
-
 (def alive true)
 (def dead false)
+(def alive? true?)
+(def dead? false?)
 
 (defn eval-cell
   [x y board]

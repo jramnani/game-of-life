@@ -96,40 +96,6 @@
       (is (= 5 (count (filter alive? (get-neighbors 2 2 board))))))))
 
 
-(deftest living-cell-test
-  (let [two-alive-neighbors [true true
-                         false false false false false false]
-        three-alive-neighbors [true true true
-                           false false false false false]]
-
-    (testing "A cell that is alive should stay alive if two of its neighbors are alive."
-      (is (= true (stay-alive? two-alive-neighbors))))
-
-    (testing "A cell that is alive should stay alive if three of its neighbors are alive."
-      (is (= true (stay-alive? three-alive-neighbors))))))
-
-
-(deftest cell-becomes-alive-test
-  (let [alive-neighbors [true  true  true
-                         false false false false false]
-        dead-neighbors [true  true
-                        false false false false false false]]
-    (testing "If a cell is dead then it becomes alive if it has three alive neighbors."
-      (is (= true (become-alive? alive-neighbors))))
-    (testing "If a dead cell has two alive neighbors it is still dead."
-      (is (= false (become-alive? dead-neighbors))))))
-
-
-(deftest dead-cell-test
-  (let [no-alive-neighbors [true
-                            false false false false false false false]
-        overpopulated-neighbors [true true true true
-                                 false false false false false]]
-    (testing "A cell dies if it has no living neighbors."
-      (= true (stay-alive? no-alive-neighbors)))
-    (testing "A cell dies of overpopulation with more than 3 live neighbors."
-      (= false (stay-alive? overpopulated-neighbors)))))
-
 (deftest eval-cell-test
   (let [alive-board [[false false false]
                      [false true  true]
@@ -141,6 +107,7 @@
       (is (= true (eval-cell 2 2 alive-board))))
     (testing "A cell with no alive neighbors should die."
       (is (= false (eval-cell 1 1 dead-board))))))
+
 
 (deftest next-iteration-test
   (let [first-board [[false false false]
