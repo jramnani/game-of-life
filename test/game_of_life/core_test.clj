@@ -146,8 +146,13 @@
   (let [first-board [[false false false]
                      [false true  true]
                      [false true  false]]
-        next-board [[false false false]
-                    [false true  true]
-                    [false true  true]]]
-    (testing "Cells evolve from one iteration to the next."
-      (is (= next-board (next-iteration first-board))))))
+        second-board [[true true true]
+                      [true true true]
+                      [true true true]]
+        third-board [[false false false]
+                     [false false false]
+                     [false false false]]]
+    (testing "All cells are alive in the second iteration."
+      (is (= second-board (next-iteration first-board))))
+    (testing "All cells are dead in the third iteration."
+      (is (= third-board (next-iteration second-board))))))

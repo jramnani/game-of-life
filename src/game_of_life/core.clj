@@ -88,9 +88,11 @@
 
 (defn next-iteration
  [board]
-  [[false false false]
-   [false true  true]
-   [false true  true]])
+  (let [row (first board)
+        next-board (for [x (range (count row))
+                         y (range (count board))]
+                     (eval-cell x y board))]
+    (partition (count board) next-board)))
 
 (defn display-board-terminal
   "Print the board to a terminal."
