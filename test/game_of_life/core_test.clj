@@ -155,4 +155,6 @@
     (testing "All cells are alive in the second iteration."
       (is (= second-board (next-iteration first-board))))
     (testing "All cells are dead in the third iteration."
-      (is (= third-board (next-iteration second-board))))))
+      (is (= third-board (next-iteration second-board))))
+    (testing "Can use the output of next-iteration as input for the next generation."
+      (is (= third-board (next-iteration (next-iteration first-board)))))))
