@@ -158,3 +158,21 @@
       (is (= third-board (next-iteration second-board))))
     (testing "Can use the output of next-iteration as input for the next generation."
       (is (= third-board (next-iteration (next-iteration first-board)))))))
+
+(deftest blinker-test
+  (let [first-board [[false false false false false]
+                     [false false false false false]
+                     [false true  true  true  false]
+                     [false false false false false]
+                     [false false false false false]]
+        second-board [[false false false false false]
+                      [false false true false false]
+                      [false false true false false]
+                      [false false true false false]
+                      [false false false false false]]]
+
+    (testing "A 'blinker' changes from a horizonal row of cells to vertical."
+      (is (= second-board (next-iteration first-board))))
+
+    (testing "A 'blinker' oscillates between a horizontal and vertical row of cells."
+      (is (= first-board (next-iteration (next-iteration first-board)))))))

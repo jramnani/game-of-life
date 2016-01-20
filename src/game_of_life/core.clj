@@ -68,6 +68,7 @@
     [top top-right right bottom-right bottom bottom-left left top-left]))
 
 (def alive? true?)
+(def dead? false?)
 
 (defn become-alive?
   [cells]
@@ -80,11 +81,23 @@
     (or (= 2 alive-neighbors)
         (= 3 alive-neighbors))))
 
+(def alive true)
+(def dead false)
+
 (defn eval-cell
   [x y board]
-  (let [neighbors (get-neighbors x y board)]
-    (or (become-alive? neighbors)
-        (stay-alive? neighbors))))
+  (let [cell (get-cell x y board)
+        alive-neighbors (count (filter alive?
+                                       (get-neighbors x y board)))]
+    (cond
+      (and (alive? cell)
+           (or (= 2 alive-neighbors)
+               (= 3 alive-neighbors))) alive
+      (and (dead? cell)
+           (= 3 alive-neighbors)) alive
+      (< 2 alive-neighbors) dead  ;; underpopulation
+      (> 3 alive-neighbors) dead ;; overcrowding
+      )))
 
 (defn next-iteration
  [board]
