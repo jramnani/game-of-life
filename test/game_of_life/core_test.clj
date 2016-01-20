@@ -108,16 +108,16 @@
                              [false true  false false false]
                              [false false false false false]]]
     (testing "A dead cell with three alive neighbors should come alive."
-      (is (= true (eval-cell 2 2 alive-board))))
+      (is (= alive (eval-cell 2 2 alive-board))))
 
     (testing "An alive cell with two or three alive neighbors should stay alive."
-      (is (= true (eval-cell 1 1 alive-board))))
+      (is (= alive (eval-cell 1 1 alive-board))))
 
     (testing "A cell with fewer than two alive neighbors should die of underpopulation."
-      (is (= false (eval-cell 1 1 underpopulated-board))))
+      (is (= dead (eval-cell 1 1 underpopulated-board))))
 
     (testing "A cell with more than three live neighbors should die of overpopulation."
-      (is (= false (eval-cell 1 1 overpopulated-board))))))
+      (is (= dead (eval-cell 1 1 overpopulated-board))))))
 
 
 (deftest next-iteration-test
