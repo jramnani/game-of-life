@@ -100,13 +100,24 @@
   (let [alive-board [[false false false]
                      [false true  true]
                      [false true  false]]
-        dead-board [[false false false]
-                    [false true  false]
-                    [false false false]]]
-    (testing "A cell with three alive neighbors should come alive."
+        underpopulated-board [[false false false]
+                              [false true  false]
+                              [false false false]]
+        overpopulated-board [[false true false false false]
+                             [true  true  true  false false]
+                             [false true  false false false]
+                             [false false false false false]]]
+    (testing "A dead cell with three alive neighbors should come alive."
       (is (= true (eval-cell 2 2 alive-board))))
-    (testing "A cell with no alive neighbors should die."
-      (is (= false (eval-cell 1 1 dead-board))))))
+
+    (testing "An alive cell with two or three alive neighbors should stay alive."
+      (is (= true (eval-cell 1 1 alive-board))))
+
+    (testing "A cell with fewer than two alive neighbors should die of underpopulation."
+      (is (= false (eval-cell 1 1 underpopulated-board))))
+
+    (testing "A cell with more than three live neighbors should die of overpopulation."
+      (is (= false (eval-cell 1 1 overpopulated-board))))))
 
 
 (deftest next-iteration-test
