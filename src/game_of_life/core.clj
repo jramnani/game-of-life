@@ -1,9 +1,5 @@
 (ns game-of-life.core)
 
-; Board dimensions
-(def rows 5)
-(def columns 5)
-
 (defn create-board
   "Create a new board. Initializes all cells to be dead."
   [num-columns num-rows]
@@ -104,4 +100,7 @@
    (map println board)))
 
 (defn -main []
+  ;; Board dimensions
+  (def rows 5)
+  (def columns 5)
   (display-board-terminal (create-board columns rows)))
