@@ -89,10 +89,12 @@
 (defn next-iteration
  [board]
   (let [row (first board)
-        next-board (for [x (range (count row))
-                         y (range (count board))]
-                     (eval-cell x y board))]
-    (partition (count board) next-board)))
+        next-board (for [y (range (count board))
+                         x (range (count row))]
+                     (do
+                       ;; (println "evaluating cell - x: " x ", y: " y)
+                       (eval-cell x y board)))]
+    (partition (count row) next-board)))
 
 (defn display-board-terminal
   "Print the board to a terminal."
