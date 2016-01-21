@@ -2,6 +2,11 @@
   (:require [clojure.test :refer :all]
             [game-of-life.terminal-display :refer :all]))
 
+(deftest row-to-str-test
+  (let [row [false true true false]]
+    (is (= ".**." (row->str row)))))
+
+
 (deftest print-board-to-string-test
   (let [board [[false false false]
                [true  true  true]
