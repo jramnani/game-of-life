@@ -84,20 +84,29 @@
       )))
 
 (defn next-iteration
- [board]
+  [board]
   (let [row (first board)
         next-board (for [y (range (count board))
                          x (range (count row))]
-                     (do
-                       ;; (println "evaluating cell - x: " x ", y: " y)
-                       (eval-cell x y board)))]
+                     (eval-cell x y board))]
     (partition (count row) next-board)))
+
+(defn row->str
+  [row]
+  (clojure.string/join ""
+                       (map #(if (true? %) "*" ".") row)))
+
+(defn print-board-to-str
+  [board]
+  (let [string-rows (for [row board]
+                      (row->str row))]
+    (clojure.string/join "\n" string-rows)))
 
 (defn display-board-terminal
   "Print the board to a terminal."
   [board]
   (dorun
-   (map println board)))
+   (print-board-to-str board)))
 
 (defn -main []
   ;; Board dimensions
