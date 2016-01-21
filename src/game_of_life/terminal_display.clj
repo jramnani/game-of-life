@@ -13,7 +13,7 @@
                       (row->str row))]
     (clojure.string/join "\n" string-rows)))
 
-(defn display-board-terminal
+(defn print-board
   "Print the board to a terminal."
   [board]
   (dorun

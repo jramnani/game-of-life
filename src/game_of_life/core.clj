@@ -96,4 +96,4 @@
   ;; Board dimensions
   (def rows 5)
   (def columns 5)
-  (display-board-terminal (create-board columns rows)))
+  (print-board (create-board columns rows)))
