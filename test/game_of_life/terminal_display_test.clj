@@ -8,4 +8,4 @@
                [false false false]]
         expected "...\n***\n..."]
     (testing "Printing the board to the screen."
-      (is (= expected (print-board-to-str board))))))
+      (is (= expected (board->str board))))))
