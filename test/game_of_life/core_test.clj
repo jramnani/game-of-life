@@ -164,11 +164,3 @@
     (testing "A 'square' should stay the same after each iteration."
       (is (= board (next-iteration board)))
       (is (= board (next-iteration (next-iteration board)))))))
-
-(deftest print-board-to-string-test
-  (let [board [[false false false]
-               [true  true  true]
-               [false false false]]
-        expected "...\n***\n..."]
-    (testing "Printing the board to the screen."
-      (is (= expected (print-board-to-str board))))))

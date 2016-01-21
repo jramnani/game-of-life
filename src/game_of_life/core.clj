@@ -1,4 +1,5 @@
-(ns game-of-life.core)
+(ns game-of-life.core
+  (:require [game-of-life.terminal-display :refer :all]))
 
 (defn create-board
   "Create a new board. Initializes all cells to be dead."
@@ -90,23 +91,6 @@
                          x (range (count row))]
                      (eval-cell x y board))]
     (partition (count row) next-board)))
-
-(defn row->str
-  [row]
-  (clojure.string/join ""
-                       (map #(if (true? %) "*" ".") row)))
-
-(defn print-board-to-str
-  [board]
-  (let [string-rows (for [row board]
-                      (row->str row))]
-    (clojure.string/join "\n" string-rows)))
-
-(defn display-board-terminal
-  "Print the board to a terminal."
-  [board]
-  (dorun
-   (print-board-to-str board)))
 
 (defn -main []
   ;; Board dimensions
