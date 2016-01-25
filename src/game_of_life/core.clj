@@ -3,8 +3,10 @@
 
 
 (defn create-board
-  "([cols rows] [cols rows row-func) Create a new board with
-  dimensions using cols for width and rows for height.
+  "([cols rows] [cols rows row-func)
+
+  Create a new board with dimensions using cols for width and rows for
+  height.
 
   With no arguments it initializes all cells to be dead.
 
@@ -23,6 +25,8 @@
 
 
 (defn generate-random-row
+  "A row generating function for use in create-board.  Given the
+  number of columns, return a vector of random booleans."
   [num-columns]
   (repeatedly num-columns #(if (>= 0.5 (rand 1)) true false)))
 
