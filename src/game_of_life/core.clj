@@ -3,7 +3,7 @@
 
 
 (defn create-board
-  "([cols rows] [cols rows row-func)
+  "([cols rows] [cols rows row-func])
 
   Create a new board with dimensions using cols for width and rows for
   height.  By default it initializes all board cells to be dead.
