@@ -29,14 +29,6 @@
   (repeatedly num-columns #(if (>= 0.5 (rand 1)) true false)))
 
 
-(defn create-random-board
-  "Create a new board. Randomly assigns cells to be alive or dead."
-  [num-columns num-rows]
-  (let [board (vec (repeatedly num-rows
-                               #(generate-random-row num-columns)))]
-    board))
-
-
 (defn get-cell
     "Get the value of a cell at position x and y on the board."
   [x y board]
