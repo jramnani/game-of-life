@@ -133,4 +133,5 @@
                    [false true  true  true  false]
                    [false false false false false]
                    [false false false false false]])
-  (display-board-to-terminal (create-random-board columns rows) next-iteration))
+  (display-board-to-terminal (create-board columns rows generate-random-row)
+                             next-iteration))
