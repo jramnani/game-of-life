@@ -23,7 +23,11 @@
 
 (defn display-board-to-terminal
   [board next-iteration-func]
-  (let [scr (s/get-screen :swing)]
+  (let [cols (count (first board))
+        rows (count board)
+        scr (s/get-screen :swing
+                          {:cols cols
+                           :rows rows})]
     (s/in-screen scr
                  (loop [next-board board]
                    (dorun
