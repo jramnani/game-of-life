@@ -92,8 +92,12 @@
                      (eval-cell x y board))]
     (partition (count row) next-board)))
 
+
 (defn -main []
-  ;; Board dimensions
-  (def rows 5)
-  (def columns 5)
-  (print-board (create-board columns rows)))
+  ;; Use a blinker to test the display loop.
+  (def test-board [[false false false false false]
+                   [false false false false false]
+                   [false true  true  true  false]
+                   [false false false false false]
+                   [false false false false false]])
+  (display-board-to-terminal test-board next-iteration))

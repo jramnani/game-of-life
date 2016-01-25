@@ -1,4 +1,6 @@
-(ns game-of-life.terminal-display)
+(ns game-of-life.terminal-display
+  (:require [lanterna.terminal :as t]
+            [lanterna.screen :as s]))
 
 (defn row->str
   "Given a row on the board, return its string representation.
@@ -18,3 +20,14 @@
   [board]
   (dorun
    (print (board->str board) "\n")))
+
+(defn display-board-to-terminal
+  [board next-iteration-func]
+  (let [scr (s/get-screen :swing)]
+    (s/in-screen scr
+                 (loop [next-board board]
+                   (dorun
+                    (map-indexed #(s/put-string scr 0 %1 (row->str %2)) next-board))
+                   (s/redraw scr)
+                   (Thread/sleep 1000)
+                   (recur (next-iteration-func next-board))))))
