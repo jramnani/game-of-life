@@ -6,14 +6,12 @@
   "([cols rows] [cols rows row-func)
 
   Create a new board with dimensions using cols for width and rows for
-  height.
-
-  With no arguments it initializes all cells to be dead.
+  height.  By default it initializes all board cells to be dead.
 
   Also takes a row-func which will generate the cells for each row.
   The arity for the row-func should be one and accept the number of
   columns as its argument (fn [cols]).  It should return a vector of
-  booleans of size cols."
+  booleans the size of cols."
   ([num-columns num-rows]
    (let [row (vec (repeat num-columns false))
          board (vec (repeat num-rows row))]
