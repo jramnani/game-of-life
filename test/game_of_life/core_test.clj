@@ -7,19 +7,16 @@
     (testing "A 5x5 board has 5 rows."
       (is (= 5 (count board))))
     (testing "A 5x5 board has 5 columns."
-      (is (= 5 (count (first board)))))))
+      (is (= 5 (count (first board))))))
 
-(deftest create-a-random-game-board
-  (let [board (create-random-board 5 5)
-        first-row (first board)
-        second-row (second board)]
-    (testing "A 5x5 random board has 5 rows"
-      (is (= 5 (count board))))
+  (let [rows 5
+        columns 5
+        row-func (fn [cols] (take cols (cycle [true false])))
+        test-row [true false true false true]]
+    (testing "create-board can take a row-func to generate rows"
+      (is (= test-row
+             (first (create-board rows columns row-func)))))))
 
-    (testing "A 5x5 random board has 5 columns."
-      (is (= 5 (count (first board)))))
-
-    ()))
 
 (deftest get-cell-test
   (let [board (create-board 5 5)]
