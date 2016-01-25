@@ -1,12 +1,27 @@
 (ns game-of-life.core
   (:require [game-of-life.terminal-display :refer :all]))
 
+
 (defn create-board
   "Create a new board. Initializes all cells to be dead."
   [num-columns num-rows]
   (let [row (vec (repeat num-columns false))
         board (vec (repeat num-rows row))]
     board))
+
+
+(defn generate-random-row
+  [num-columns]
+  (repeatedly num-columns #(if (>= 0.5 (rand 1)) true false)))
+
+
+(defn create-random-board
+  "Create a new board. Randomly assigns cells to be alive or dead."
+  [num-columns num-rows]
+  (let [board (vec (repeatedly num-rows
+                               #(generate-random-row num-columns)))]
+    board))
+
 
 (defn get-cell
     "Get the value of a cell at position x and y on the board."
@@ -94,10 +109,14 @@
 
 
 (defn -main []
+  ;; Board dimensions.
+  (def columns 80)
+  (def rows 24)
+
   ;; Use a blinker to test the display loop.
   (def test-board [[false false false false false]
                    [false false false false false]
                    [false true  true  true  false]
                    [false false false false false]
                    [false false false false false]])
-  (display-board-to-terminal test-board next-iteration))
+  (display-board-to-terminal (create-random-board columns rows) next-iteration))

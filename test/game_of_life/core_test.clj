@@ -9,6 +9,17 @@
     (testing "A 5x5 board has 5 columns."
       (is (= 5 (count (first board)))))))
 
+(deftest create-a-random-game-board
+  (let [board (create-random-board 5 5)
+        first-row (first board)
+        second-row (second board)]
+    (testing "A 5x5 random board has 5 rows"
+      (is (= 5 (count board))))
+
+    (testing "A 5x5 random board has 5 columns."
+      (is (= 5 (count (first board)))))
+
+    ()))
 
 (deftest get-cell-test
   (let [board (create-board 5 5)]
