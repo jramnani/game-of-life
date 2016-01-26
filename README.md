@@ -1,4 +1,4 @@
-# game-of-life
+# Conway's Game of Life
 
 This project is a code kata for implementing [Conway's Game of Life].
 
@@ -24,7 +24,20 @@ to create further generations.
 
 ## Usage
 
-FIXME
+Use the included Makefile to run the project.
+
+### Run the tests
+
+```
+make test
+```
+
+### Run the game
+
+```
+make run
+```
+
 
 ## License
 
