@@ -30,7 +30,7 @@
 
 
 (defn get-cell
-    "Get the value of a cell at position x and y on the board."
+  "Get the value of a cell at position x and y on the board."
   [x y board]
   (let [row (nth board y)]
     (nth row x)))
