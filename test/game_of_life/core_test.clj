@@ -16,4 +16,10 @@
 (deftest neighbors-test
   (testing "neighbors should find the eight neighbors for a given cell."
     (is (= (sort '([0 0] [1 0] [2 0] [0 1] [2 1] [0 2] [1 2] [2 2]))
-           (sort (neighbors [1 1]))))))
+           (sort (neighbors [1 1])))))
+
+  (testing "A cell should not be a neighbor to itself."
+    (let [x 1
+          y 1
+          the-neighbors (neighbors [x y])]
+      (is (not (contains? (set the-neighbors) [x y]))))))
