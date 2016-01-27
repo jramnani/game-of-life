@@ -57,3 +57,12 @@
                :else [x y]))
            )
          neighbors)))
+
+(defn live
+  "Determine whether a cell should be alive.
+  Given the number of live neighbors, and whether the cell is alive.
+  Returns a boolean."
+  [n alive?]
+  (or (= n 3)
+      (= n 2))
+  )

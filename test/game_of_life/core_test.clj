@@ -107,3 +107,24 @@
     (let [world (create-world 3 3 #{[1 1]})
           the-neighbors (neighbors [1 1])]
       (is (= 8 (count (wrap-neighbors the-neighbors world)))))))
+
+
+(deftest game-of-life-rules-test
+  (let [alive true
+        dead false]
+    (testing "A dead cell with three live neighbors should become alive."
+      (is (= alive (live 3 dead))))
+    (testing "A live cell with two live neighbors stays alive."
+      (is (= alive (live 2 alive))))))
+
+
+(deftest blinker-test
+  ;; Given a 5x5 world.
+  ;; | 0,0 | 1,0 | 2,0 | 3,0 | 4,0 |
+  ;; | 0,1 | 1,1 | 2,1 | 3,1 | 4,1 |
+  ;; | 0,2 | 1,2 | 2,2 | 3,2 | 4,2 |
+  ;; | 0,3 | 1,3 | 2,3 | 3,3 | 4,3 |
+  ;; | 0,4 | 1,4 | 2,4 | 3,4 | 4,4 |
+  (testing "A blinker oscillates between a horizontal and vertial line of 3."
+    (let [horizonal-blinker #{[1 1] [2 1] [3 1]}
+          vertical-blinker  #{[2 0] [2 1] [2 2]}])))
