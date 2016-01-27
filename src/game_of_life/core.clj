@@ -38,10 +38,12 @@
            (let [x (first xy)
                  y (second xy)]
              (cond
+               ;; wrap top-right to bottom-left.
                (and (>= x width-index)
-                    (<= y 0)) [0 height-index] ;; wrap top-right to bottom-left.
+                    (<= y 0)) [0 height-index]
+               ;; wrap bottom-left to top-right.
                (and (<= x 0)
-                    (>= y height-index)) [width-index 0] ;; wrap bottom-left to top-right
+                    (>= y height-index)) [width-index 0]
                (>= x width-index) [0 y] ;; wrap right to left.
                (<= x 0) [width-index y] ;; wrap left to right.
                (<= y 0) [x height-index] ;; wrap top to bottom
