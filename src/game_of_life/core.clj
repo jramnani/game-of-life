@@ -41,6 +41,7 @@
                (>= x width-index) [0 y] ;; wrap right to left.
                (<= x 0) [width-index y] ;; wrap left to right.
                (<= y 0) [x height-index] ;; wrap top to bottom
+               (>= y height-index) [x 0] ;; wrap bottom to top.
                :else [x y]))
            )
          cells)))
