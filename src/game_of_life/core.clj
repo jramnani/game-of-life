@@ -38,8 +38,9 @@
            (let [x (first xy)
                  y (second xy)]
              (cond
-               (>= x width-index) [0 y]
-               (<= x 0) [width-index y]
+               (>= x width-index) [0 y] ;; wrap right to left.
+               (<= x 0) [width-index y] ;; wrap left to right.
+               (<= y 0) [x height-index] ;; wrap top to bottom
                :else [x y]))
            )
          cells)))
