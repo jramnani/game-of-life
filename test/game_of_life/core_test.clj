@@ -5,8 +5,7 @@
 ;; Given that a 'cell' is a two item vector of integers containing x,y coordinates.
 ;; e.g. [1 2]
 
-;; And the 'world' is a set of two item vectors containing x,y
-;; coordinates.
+;; And the 'world' is a set of cells.
 ;; e.g. #{[0 0] [0 1] [0 2] [0 1] [1 1] [1 2]}
 
 ;; And only 'live' cells are contained in the set.  Dead cells are omitted.
@@ -102,4 +101,9 @@
           world (create-world 3 3 #{bottom-right})
           the-neighbors (wrap-neighbors (neighbors bottom-right)
                                         world)]
-      (is (contains? (set the-neighbors) top-left)))))
+      (is (contains? (set the-neighbors) top-left))))
+
+  (testing "wrap-neighbors returns eight nighbors."
+    (let [world (create-world 3 3 #{[1 1]})
+          the-neighbors (neighbors [1 1])]
+      (is (= 8 (count (wrap-neighbors the-neighbors world)))))))

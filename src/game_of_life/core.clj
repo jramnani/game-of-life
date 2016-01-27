@@ -26,14 +26,14 @@
              [-1 0 1])]
     [(+ dx x) (+ dy y)]))
 
+
 (defn wrap-neighbors
   "Clamp the list of neighbors to be inside the world."
   [neighbors world]
   ;; Because 0,0 is a valid coordinate, we have to decrement the width and
   ;; height to get valid boundary indices.
   (let [height-index (dec (:height world))
-        width-index (dec (:width world))
-        cells (:cells world)]
+        width-index (dec (:width world))]
     (map (fn [xy]
            (let [x (first xy)
                  y (second xy)]
@@ -56,4 +56,4 @@
                (>= y height-index) [x 0] ;; wrap bottom to top.
                :else [x y]))
            )
-         cells)))
+         neighbors)))
