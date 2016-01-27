@@ -32,28 +32,28 @@
   [neighbors world]
   ;; Because 0,0 is a valid coordinate, we have to decrement the width and
   ;; height to get valid boundary indices.
-  (let [height-index (dec (:height world))
-        width-index (dec (:width world))]
+  (let [max-height (dec (:height world))
+        max-width (dec (:width world))]
     (map (fn [xy]
            (let [x (first xy)
                  y (second xy)]
              (cond
                ;; wrap top-right to bottom-left.
-               (and (>= x width-index)
-                    (<= y 0)) [0 height-index]
+               (and (>= x max-width)
+                    (<= y 0)) [0 max-height]
                ;; wrap bottom-left to top-right.
                (and (<= x 0)
-                    (>= y height-index)) [width-index 0]
+                    (>= y max-height)) [max-width 0]
                ;; wrap top-left to bottom-right.
                (and (<= x 0)
-                    (<= y 0)) [width-index height-index]
+                    (<= y 0)) [max-width max-height]
                ;; wrap bottom-right to top-left
-               (and (>= x width-index)
-                    (>= y height-index)) [0 0]
-               (>= x width-index) [0 y] ;; wrap right to left.
-               (<= x 0) [width-index y] ;; wrap left to right.
-               (<= y 0) [x height-index] ;; wrap top to bottom
-               (>= y height-index) [x 0] ;; wrap bottom to top.
+               (and (>= x max-width)
+                    (>= y max-height)) [0 0]
+               (>= x max-width) [0 y] ;; wrap right to left.
+               (<= x 0) [max-width y] ;; wrap left to right.
+               (<= y 0) [x max-height] ;; wrap top to bottom
+               (>= y max-height) [x 0] ;; wrap bottom to top.
                :else [x y]))
            )
          neighbors)))
