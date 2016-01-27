@@ -78,6 +78,12 @@
           world (create-world 3 3 #{top-right})
           the-neighbors (wrap-neighbors (neighbors top-right)
                                         world)]
-      (println "DEBUG: neighbors = " (neighbors top-right))
-      (println "DEBUG: wrapped-neighbors = " the-neighbors)
-      (is (contains? (set the-neighbors) bottom-left)))))
+      (is (contains? (set the-neighbors) bottom-left))))
+
+  (testing "The world wraps from bottom left to top right."
+    (let [top-right [2,0]
+          bottom-left [0,2]
+          world (create-world 3 3 #{bottom-left})
+          the-neighbors (wrap-neighbors (neighbors bottom-left)
+                                        world)]
+      (is (contains? (set the-neighbors) top-right)))))
