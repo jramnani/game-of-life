@@ -14,7 +14,8 @@
 
 
 (defn neighbors
-  "Takes a two-item vector of integers representing the cell at coordinates x and y.
+  "First arg is a two-item vector of integers representing the cell at coordinates x and y.
+  Second arg is a HashMap of the world as created by 'create-world'.
   Returns a list of coordinates of the cell's eight neighbors."
   [[x y]]
   (for [dx [-1 0 1]  ;; left, center, and right.
@@ -24,3 +25,18 @@
              [-1 1]
              [-1 0 1])]
     [(+ dx x) (+ dy y)]))
+
+(defn wrap-neighbors
+  "Clamp the list of neighbors to be inside the world."
+  [neighbors world]
+  (let [height (:height world)
+        width  (:width world)
+        cells (:cells world)]
+    (map (fn [xy]
+           (let [x (first xy)
+                 y (second xy)]
+             (cond
+               (>= x width) [0 y]
+               :else [x y]))
+           )
+         cells)))

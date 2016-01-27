@@ -34,13 +34,14 @@
           the-neighbors (neighbors [x y])]
       (is (not (contains? (set the-neighbors) [x y]))))))
 
-;; (deftest wrapping-world-test
-;;   (testing "A cell on the right edge of the world has a neighbor on the left edge."
-;;     ;; Given a 3x3 world.
-;;     (let [world #{[3 1] [0 1]}
-;;           right-x 3
-;;           right-y 1
-;;           left-x 0
-;;           left-y 1
-;;           the-neighbors (neighbors [right-x right-y])]
-;;       (is (contains? (set the-neighbors) [left-x left-y])))))
+(deftest wrapping-neighbors-test
+  (testing "The world wraps from right to left."
+    ;; Given a 3x3 world.
+    (let [right-x 3
+          right-y 1
+          left-x 0
+          left-y 1
+          world (create-world 3 3 #{[right-x right-y]})
+          test-neighbors (neighbors [right-x right-y])
+          the-neighbors (wrap-neighbors test-neighbors world)]
+      (is (contains? (set the-neighbors) [left-x left-y])))))
