@@ -39,6 +39,7 @@
                  y (second xy)]
              (cond
                (>= x width-index) [0 y]
+               (<= x 0) [width-index y]
                :else [x y]))
            )
          cells)))

@@ -35,14 +35,23 @@
       (is (not (contains? (set the-neighbors) [x y]))))))
 
 (deftest wrapping-neighbors-test
+  ;; Given a 3x3 world.
+  ;; | 0,0 | 1,0 | 2,0 |
+  ;; | 0,1 | 1,1 | 2,1 |
+  ;; | 0,2 | 1,2 | 2,2 |
+
   (testing "The world wraps from right to left."
-    ;; Given a 3x3 world.
-    ;; | 0,0 | 1,0 | 2,0 |
-    ;; | 0,1 | 1,1 | 2,1 |
-    ;; | 0,2 | 1,2 | 2,2 |
     (let [right [2,1]
           left [0,1]
           world (create-world 3 3 #{right})
           test-neighbors (neighbors right)
           the-neighbors (wrap-neighbors test-neighbors world)]
-      (is (contains? (set the-neighbors) left)))))
+      (is (contains? (set the-neighbors) left))))
+
+  (testing "The world wraps from left to right."
+    (let [right [2,1]
+          left [0,1]
+          world (create-world 3 3 #{left})
+          the-neighbors (wrap-neighbors (neighbors left)
+                                        world)]
+      (is (contains? (set the-neighbors) right)))))
