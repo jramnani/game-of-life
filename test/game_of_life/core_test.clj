@@ -86,4 +86,12 @@
           world (create-world 3 3 #{bottom-left})
           the-neighbors (wrap-neighbors (neighbors bottom-left)
                                         world)]
-      (is (contains? (set the-neighbors) top-right)))))
+      (is (contains? (set the-neighbors) top-right))))
+
+  (testing "The world wraps from top left to bottom right."
+    (let [top-left [0 0]
+          bottom-right [2,2]
+          world (create-world 3 3 #{top-left})
+          the-neighbors (wrap-neighbors (neighbors top-left)
+                                        world)]
+      (is (contains? (set the-neighbors) bottom-right)))))

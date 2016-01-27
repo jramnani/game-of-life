@@ -44,6 +44,9 @@
                ;; wrap bottom-left to top-right.
                (and (<= x 0)
                     (>= y height-index)) [width-index 0]
+               ;; wrap top-left to bottom-right.
+               (and (<= x 0)
+                    (<= y 0)) [width-index height-index]
                (>= x width-index) [0 y] ;; wrap right to left.
                (<= x 0) [width-index y] ;; wrap left to right.
                (<= y 0) [x height-index] ;; wrap top to bottom
