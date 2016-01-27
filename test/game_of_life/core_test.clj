@@ -37,11 +37,12 @@
 (deftest wrapping-neighbors-test
   (testing "The world wraps from right to left."
     ;; Given a 3x3 world.
-    (let [right-x 3
-          right-y 1
-          left-x 0
-          left-y 1
-          world (create-world 3 3 #{[right-x right-y]})
-          test-neighbors (neighbors [right-x right-y])
+    ;; | 0,0 | 1,0 | 2,0 |
+    ;; | 0,1 | 1,1 | 2,1 |
+    ;; | 0,2 | 1,2 | 2,2 |
+    (let [right [2,1]
+          left [0,1]
+          world (create-world 3 3 #{right})
+          test-neighbors (neighbors right)
           the-neighbors (wrap-neighbors test-neighbors world)]
-      (is (contains? (set the-neighbors) [left-x left-y])))))
+      (is (contains? (set the-neighbors) left)))))
