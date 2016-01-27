@@ -5,7 +5,8 @@
   "Create a HashMap with the keys:
   height: integer
   width: integer
-  cells: set of [x,y] coordinate pairs of live cells. e.g. #{[0 0] [0 1] [0 2] [1 2]}"
+  cells: set of [x,y] coordinate pairs of live cells.
+         e.g. #{[0 0] [0 1] [0 2] [1 2]}"
   ([height width]
    {:height height :width width :cells #{}})
   ([height width cells]
