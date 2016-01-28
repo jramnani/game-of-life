@@ -9,19 +9,6 @@
   (clojure.string/join ""
                        (map #(if (true? %) "*" ".") row)))
 
-(defn board->str
-  [board]
-  (let [string-rows (for [row board]
-                      (row->str row))]
-    (clojure.string/join "\n" string-rows)))
-
-(defn print-board
-  "Print the board to a terminal."
-  [board]
-  (dorun
-   (print (board->str board) "\n")))
-
-
 (defn world->rows
   "Convert a sparse matrix world into a list of lists of booleans.
   This is necessary to plug into the display code."

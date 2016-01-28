@@ -8,15 +8,6 @@
     (is (= ".**." (row->str row)))))
 
 
-(deftest print-board-to-string-test
-  (let [board [[false false false]
-               [true  true  true]
-               [false false false]]
-        expected "...\n***\n..."]
-    (testing "Printing the board to the screen."
-      (is (= expected (board->str board))))))
-
-
 (deftest convert-world-to-rows-test
   (testing "Convert a sparse matrix world into a list of lists of booleans."
     (let [world (create-world 3 3 #{[0 0] [2 0]})
