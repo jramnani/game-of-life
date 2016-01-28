@@ -39,21 +39,21 @@
                  y (second xy)]
              (cond
                ;; wrap top-right to bottom-left.
-               (and (>= x max-width)
-                    (<= y 0)) [0 max-height]
+               (and (> x max-width)
+                    (< y 0)) [0 max-height]
                ;; wrap bottom-left to top-right.
-               (and (<= x 0)
-                    (>= y max-height)) [max-width 0]
+               (and (< x 0)
+                    (> y max-height)) [max-width 0]
                ;; wrap top-left to bottom-right.
-               (and (<= x 0)
-                    (<= y 0)) [max-width max-height]
+               (and (< x 0)
+                    (< y 0)) [max-width max-height]
                ;; wrap bottom-right to top-left
-               (and (>= x max-width)
-                    (>= y max-height)) [0 0]
-               (>= x max-width) [0 y] ;; wrap right to left.
-               (<= x 0) [max-width y] ;; wrap left to right.
-               (<= y 0) [x max-height] ;; wrap top to bottom
-               (>= y max-height) [x 0] ;; wrap bottom to top.
+               (and (> x max-width)
+                    (> y max-height)) [0 0]
+               (> x max-width) [0 y] ;; wrap right to left.
+               (< x 0) [max-width y] ;; wrap left to right.
+               (< y 0) [x max-height] ;; wrap top to bottom
+               (> y max-height) [x 0] ;; wrap bottom to top.
                :else [x y]))
            )
          neighbors)))
@@ -67,3 +67,16 @@
   [n alive?]
   (or (= n 3)
       (and (= n 2) alive?)))
+
+(defn step
+  [world]
+  (let [cells (:cells world)
+        the-neighbors (mapcat neighbors cells)
+        wrapped-neighbors (wrap-neighbors the-neighbors world)]
+    ;; (println "DEBUG: cells = " (sort cells))
+    ;; (println "DEBUG: neighbors = " (sort the-neighbors))
+    ;; (println "DEBUG: wrapped-neighbors = " (sort wrapped-neighbors))
+    ;; (println "DEBUG: count of neighbors = " (count wrapped-neighbors))
+    (for [[cell n] (frequencies wrapped-neighbors)
+          :when (live n (contains? cells cell))]
+      cell)))

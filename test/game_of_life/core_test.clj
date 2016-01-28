@@ -139,4 +139,7 @@
   ;; | 0,4 | 1,4 | 2,4 | 3,4 | 4,4 |
   (testing "A blinker oscillates between a horizontal and vertial line of 3."
     (let [horizonal-blinker #{[1 1] [2 1] [3 1]}
-          vertical-blinker  #{[2 0] [2 1] [2 2]}])))
+          vertical-blinker  #{[2 0] [2 1] [2 2]}
+          initial-world (create-world 5 5 horizonal-blinker)]
+      (is (= (sort vertical-blinker)
+             (sort (step initial-world)))))))
