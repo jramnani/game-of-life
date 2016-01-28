@@ -28,7 +28,9 @@
 
 
 (defn wrap-neighbors
-  "Clamp the list of neighbors to be inside the world."
+  "Given a list of neighbors compute their coordinates to be within
+  the dimensions of the world, and that the edges of the board touch.
+  In the Game of Life, this is called a 'wrapped' world."
   [neighbors world]
   ;; Because 0,0 is a valid coordinate, we have to decrement the width and
   ;; height to get valid boundary indices.
@@ -67,6 +69,7 @@
   [n alive?]
   (or (= n 3)
       (and (= n 2) alive?)))
+
 
 (defn step
   [world]
