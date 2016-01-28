@@ -86,4 +86,4 @@
   (def blinker-cells #{[1 1] [2 1] [3 1]})
   (def initial-world (create-world height width blinker-cells))
 
-  (display-board-to-terminal initial-world step))
+  (display-world-to-terminal initial-world step))

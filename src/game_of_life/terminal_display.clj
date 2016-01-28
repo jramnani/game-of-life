@@ -38,7 +38,7 @@
       (recur (next-iteration-func next-world)))))
 
 
-(defn display-board-to-terminal
+(defn display-world-to-terminal
   [world next-iteration-func]
   (let [width (:width world)
         height (:height world)
