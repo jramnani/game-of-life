@@ -3,7 +3,7 @@
             [lanterna.screen :as s]))
 
 (defn world->rows
-  "Convert a sparse matrix world into a list of lists of booleans.
+  "Convert a sparse matrix world into a dense matrix of booleans.
   This is necessary to plug into the display code.
   Given You want a 3x3 grid displayed.
   Then convert a world that looks like this:

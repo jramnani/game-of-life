@@ -9,7 +9,7 @@
 
 
 (deftest convert-world-to-rows-test
-  (testing "Convert a sparse matrix world into a list of lists of booleans."
+  (testing "Convert a sparse matrix world into a dense matrix of booleans."
     (let [world (create-world 3 3 #{[0 0] [2 0]})
           expected [true false true]]
       (is (= expected (first (world->rows world)))))))
