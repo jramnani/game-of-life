@@ -2,21 +2,30 @@
   (:require [lanterna.terminal :as t]
             [lanterna.screen :as s]))
 
+(defn world->rows
+  "Convert a sparse matrix world into a list of lists of booleans.
+  This is necessary to plug into the display code.
+  Given You want a 3x3 grid displayed.
+  Then convert a world that looks like this:
+    #{[0 0] [0 2]}
+  To:
+    [[true  false true]
+     [false false false]
+     [false false false]]
+  "
+  [world]
+  (let [list-of-bools (for [y (range (:height world))
+                            x (range (:width world))]
+                        (contains? (:cells world) [x y]))]
+    (partition (:width world) list-of-bools)))
+
+
 (defn row->str
   "Given a row on the board, return its string representation.
   e.g. [false true true false] -> '.**.'"
   [row]
   (clojure.string/join ""
                        (map #(if (true? %) "*" ".") row)))
-
-(defn world->rows
-  "Convert a sparse matrix world into a list of lists of booleans.
-  This is necessary to plug into the display code."
-  [world]
-  (let [list-of-bools (for [y (range (:height world))
-                            x (range (:width world))]
-                        (contains? (:cells world) [x y]))]
-    (partition (:width world) list-of-bools)))
 
 
 (defn display-board-to-terminal
