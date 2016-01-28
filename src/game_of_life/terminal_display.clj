@@ -27,19 +27,23 @@
   (clojure.string/join ""
                        (map #(if (true? %) "*" ".") row)))
 
+(defn display-loop-terminal
+  [screen world next-iteration-func]
+  (loop [next-world world]
+    (let [rows (world->rows next-world)]
+      (dorun
+       (map-indexed #(s/put-string screen 0 %1 (row->str %2)) rows))
+      (s/redraw screen)
+      (Thread/sleep 1000)
+      (recur (next-iteration-func next-world)))))
+
 
 (defn display-board-to-terminal
   [world next-iteration-func]
   (let [width (:width world)
         height (:height world)
-        scr (s/get-screen :swing
+        screen (s/get-screen :swing
                           {:cols width
                            :rows height})]
-    (s/in-screen scr
-                 (loop [next-world world]
-                   (let [rows (world->rows next-world)]
-                     (dorun
-                      (map-indexed #(s/put-string scr 0 %1 (row->str %2)) rows))
-                     (s/redraw scr)
-                     (Thread/sleep 1000)
-                     (recur (next-iteration-func next-world)))))))
+    (s/in-screen screen
+                 (display-loop-terminal screen world next-iteration-func))))
