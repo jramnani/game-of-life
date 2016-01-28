@@ -77,3 +77,13 @@
               :when (live n (contains? cells cell))]
                     cell)]
     (assoc world :cells (set new-cells))))
+
+
+(defn -main
+  []
+  (def height 20)
+  (def width 80)
+  (def blinker-cells #{[1 1] [2 1] [3 1]})
+  (def initial-world (create-world height width blinker-cells))
+
+  (display-board-to-terminal initial-world step))
