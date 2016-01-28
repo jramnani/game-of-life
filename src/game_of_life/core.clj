@@ -82,14 +82,18 @@
     (assoc world :cells (set new-cells))))
 
 
+(defn generate-random-cells
+  []
+  (set (repeatedly (/ (* height width)
+                      4)
+                   #(vec [(rand-int width) (rand-int height)]))))
+
 (defn -main
   []
   (def height 20)
   (def width 80)
   (def blinker-cells #{[1 1] [2 1] [3 1]})
-  (def random-cells (set (repeatedly (/ (* height width)
-                                        4)
-                                     #(vec [(rand-int width) (rand-int height)]))))
+  (def random-cells (generate-random-cells))
   (def initial-world (create-world height width random-cells))
 
   (display-world-to-terminal initial-world step))
