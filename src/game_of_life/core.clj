@@ -87,6 +87,9 @@
   (def height 20)
   (def width 80)
   (def blinker-cells #{[1 1] [2 1] [3 1]})
-  (def initial-world (create-world height width blinker-cells))
+  (def random-cells (set (repeatedly (/ (* height width)
+                                        4)
+                                     #(vec [(rand-int width) (rand-int height)]))))
+  (def initial-world (create-world height width random-cells))
 
   (display-world-to-terminal initial-world step))
