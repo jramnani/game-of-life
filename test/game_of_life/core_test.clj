@@ -142,4 +142,6 @@
           vertical-blinker  #{[2 0] [2 1] [2 2]}
           initial-world (create-world 5 5 horizonal-blinker)]
       (is (= (sort vertical-blinker)
-             (sort (step initial-world)))))))
+             (sort (:cells (step initial-world)))))
+      (is (= (sort horizonal-blinker)
+             (sort (:cells (step (step initial-world)))))))))

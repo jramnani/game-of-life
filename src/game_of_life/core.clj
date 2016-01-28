@@ -72,11 +72,8 @@
   [world]
   (let [cells (:cells world)
         the-neighbors (mapcat neighbors cells)
-        wrapped-neighbors (wrap-neighbors the-neighbors world)]
-    ;; (println "DEBUG: cells = " (sort cells))
-    ;; (println "DEBUG: neighbors = " (sort the-neighbors))
-    ;; (println "DEBUG: wrapped-neighbors = " (sort wrapped-neighbors))
-    ;; (println "DEBUG: count of neighbors = " (count wrapped-neighbors))
-    (for [[cell n] (frequencies wrapped-neighbors)
-          :when (live n (contains? cells cell))]
-      cell)))
+        wrapped-neighbors (wrap-neighbors the-neighbors world)
+        new-cells (for [[cell n] (frequencies wrapped-neighbors)
+              :when (live n (contains? cells cell))]
+                    cell)]
+    (assoc world :cells (set new-cells))))
