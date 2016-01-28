@@ -58,11 +58,12 @@
            )
          neighbors)))
 
+
 (defn live
   "Determine whether a cell should be alive.
-  Given the number of live neighbors, and whether the cell is alive.
+  n: (integer) value of live neighbors.
+  alive?: (boolean) is the cell alive?
   Returns a boolean."
   [n alive?]
   (or (= n 3)
-      (= n 2))
-  )
+      (and (= n 2) alive?)))

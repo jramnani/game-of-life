@@ -112,10 +112,22 @@
 (deftest game-of-life-rules-test
   (let [alive true
         dead false]
+
+    (testing "A dead cell with two live neighbors should stay dead."
+      (is (= dead (live 2 dead))))
+
     (testing "A dead cell with three live neighbors should become alive."
       (is (= alive (live 3 dead))))
-    (testing "A live cell with two live neighbors stays alive."
-      (is (= alive (live 2 alive))))))
+
+    (testing "A live cell with two or three live neighbors stays alive."
+      (is (= alive (live 2 alive)))
+      (is (= alive (live 3 alive))))
+
+    (testing "A live cell with fewer than two live neighbors should die of underpopulation."
+      (is (= dead (live 1 alive))))
+
+    (testing "A cell with more than three live neighbors should die of overpopulation."
+      (is (= dead (live 4 alive))))))
 
 
 (deftest blinker-test
