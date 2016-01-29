@@ -34,3 +34,14 @@
                             :else y))
                         ys)]
     (map #(vec [%1 %2]) wrapped-xs wrapped-ys)))
+
+(defn live
+  [n alive?]
+  (or (= n 3)
+      (and (= n 2)
+           alive?)))
+
+(defn step
+  [world]
+  (let [cells (:cells world)
+        the-neighbors ]))
