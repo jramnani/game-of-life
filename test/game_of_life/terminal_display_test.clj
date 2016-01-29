@@ -11,4 +11,5 @@
   (testing "Convert a sparse matrix world into a dense matrix of booleans."
     (let [world {:height 3 :width 3 :cells #{[0,0] [2,0]}}
           expected [true false true]]
+      (is (= 3 (count (world->rows world))))
       (is (= expected (first (world->rows world)))))))
