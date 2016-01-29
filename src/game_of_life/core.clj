@@ -83,7 +83,7 @@
 
 
 (defn generate-random-cells
-  []
+  [height width]
   (set (repeatedly (/ (* height width)
                       4)
                    #(vec [(rand-int width) (rand-int height)]))))
