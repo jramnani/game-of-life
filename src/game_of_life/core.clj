@@ -93,7 +93,8 @@
   (def height 20)
   (def width 80)
   (def blinker-cells #{[1 1] [2 1] [3 1]})
-  (def random-cells (generate-random-cells))
-  (def initial-world (create-world height width random-cells))
+  (def glider-cells #{[1,1] [2,1] [3,1] [1,2] [2,3]})
+  (def random-cells (generate-random-cells height width))
+  (def initial-world (create-world height width glider-cells))
 
   (display-world-to-terminal initial-world step))
