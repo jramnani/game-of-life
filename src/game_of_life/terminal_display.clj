@@ -2,6 +2,24 @@
   (:require [lanterna.terminal :as t]
             [lanterna.screen :as s]))
 
+(defn world->rows
+  "Convert a sparse matrix world into a dense matrix of booleans.
+  This is necessary to plug into the display code.
+  Given You want a 3x3 grid displayed.
+  Then convert a world that looks like this:
+    #{[0 0] [0 2]}
+  To:
+    [[true  false true]
+     [false false false]
+     [false false false]]
+  "
+  [world]
+  (let [list-of-bools (for [y (range (:height world))
+                            x (range (:width world))]
+                        (contains? (:cells world) [x y]))]
+    (partition (:width world) list-of-bools)))
+
+
 (defn row->str
   "Given a row on the board, return its string representation.
   e.g. [false true true false] -> '.**.'"
@@ -9,29 +27,23 @@
   (clojure.string/join ""
                        (map #(if (true? %) "*" ".") row)))
 
-(defn board->str
-  [board]
-  (let [string-rows (for [row board]
-                      (row->str row))]
-    (clojure.string/join "\n" string-rows)))
+(defn display-loop-terminal
+  [screen world next-iteration-func]
+  (loop [next-world world]
+    (let [rows (world->rows next-world)]
+      (dorun
+       (map-indexed #(s/put-string screen 0 %1 (row->str %2)) rows))
+      (s/redraw screen)
+      (Thread/sleep 1000)
+      (recur (next-iteration-func next-world)))))
 
-(defn print-board
-  "Print the board to a terminal."
-  [board]
-  (dorun
-   (print (board->str board) "\n")))
 
-(defn display-board-to-terminal
-  [board next-iteration-func]
-  (let [cols (count (first board))
-        rows (count board)
-        scr (s/get-screen :swing
-                          {:cols cols
-                           :rows rows})]
-    (s/in-screen scr
-                 (loop [next-board board]
-                   (dorun
-                    (map-indexed #(s/put-string scr 0 %1 (row->str %2)) next-board))
-                   (s/redraw scr)
-                   (Thread/sleep 1000)
-                   (recur (next-iteration-func next-board))))))
+(defn display-world-to-terminal
+  [world next-iteration-func]
+  (let [width (:width world)
+        height (:height world)
+        screen (s/get-screen :swing
+                          {:cols width
+                           :rows height})]
+    (s/in-screen screen
+                 (display-loop-terminal screen world next-iteration-func))))

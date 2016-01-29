@@ -7,10 +7,8 @@
     (is (= ".**." (row->str row)))))
 
 
-(deftest print-board-to-string-test
-  (let [board [[false false false]
-               [true  true  true]
-               [false false false]]
-        expected "...\n***\n..."]
-    (testing "Printing the board to the screen."
-      (is (= expected (board->str board))))))
+(deftest convert-world-to-rows-test
+  (testing "Convert a sparse matrix world into a dense matrix of booleans."
+    (let [world {:height 3 :width 3 :cells #{[0,0] [2,0]}}
+          expected [true false true]]
+      (is (= expected (first (world->rows world)))))))
