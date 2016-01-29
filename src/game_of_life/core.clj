@@ -23,13 +23,13 @@
         ys (map second neighbors)
         wrapped-xs (map (fn [x]
                           (cond
-                            (< 0 x) max-width
+                            (< x 0) max-width
                             (> x max-width) 0
                             :else x))
                         xs)
         wrapped-ys (map (fn [y]
                           (cond
-                            (< 0 y) max-height
+                            (< y 0) max-height
                             (> y max-height) 0
                             :else y))
                         ys)]
