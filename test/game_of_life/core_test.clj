@@ -47,7 +47,9 @@
       (is (= dead (live 1 alive))))))
 
 (deftest blinker-test
-  (let [horizontal-blinker #{[1,1] [2,1] [3,1]}
-        vertical-blinker #{[2,0] [2,1] [2,2]}
-        initial-world (create-world 5 5 horizontal-blinker)]
-    (is (= vertical-blinker (step initial-world)))))
+  (testing "A 'blinker' oscillates between a horizontal and vertical line."
+    (let [horizontal-blinker #{[1,1] [2,1] [3,1]}
+          vertical-blinker #{[2,0] [2,1] [2,2]}
+          initial-world (create-world 5 5 horizontal-blinker)]
+      (is (= vertical-blinker (:cells (step initial-world))))
+      (is (= horizontal-blinker (:cells (step (step initial-world))))))))

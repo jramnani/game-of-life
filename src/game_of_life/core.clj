@@ -43,5 +43,10 @@
 
 (defn step
   [world]
-  (let [vertical-blinker #{[2,0] [2,1] [2,2]}]
-    vertical-blinker))
+  (let [cells (:cells world)
+        the-neighbors (mapcat neighbors cells)
+        wrapped-neighbors (world-wrap-neighbors the-neighbors world)
+        new-cells (for [[cell n] (frequencies wrapped-neighbors)
+                        :when (live n (contains? cells cell))]
+                    cell)]
+    (assoc world :cells (set new-cells))))
