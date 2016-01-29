@@ -11,13 +11,13 @@
   (testing "A cell at x,y has eight neighbors."
     (let [x 1 y 1
           world (create-world 3 3 #{})]
-      (is (= 8 (count (neighbors x y)))))))
+      (is (= 8 (count (neighbors [x y])))))))
 
 (deftest wrapped-world-test
   (testing "Cells on opposite sides of the board are adjacent."
     (let [world (create-world 3 3 #{})
           x 0 y 0
-          the-neighbors (world-wrap-neighbors (neighbors x y) world)
+          the-neighbors (world-wrap-neighbors (neighbors [x y]) world)
           ;; expected neighbors
           top [0,2]
           left [2 0]

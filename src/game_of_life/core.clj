@@ -8,7 +8,7 @@
 
 
 (defn neighbors
-  [x y]
+  [[x y]]
   (for [dx [-1 0 1]
         dy (if (zero? dx)
              [-1 1]
@@ -43,5 +43,5 @@
 
 (defn step
   [world]
-  (let [cells (:cells world)
-        the-neighbors ]))
+  (let [vertical-blinker #{[2,0] [2,1] [2,2]}]
+    vertical-blinker))
