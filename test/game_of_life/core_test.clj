@@ -15,9 +15,21 @@
       (is (= 8 (count neighbors))))))
 
 (deftest world-wrap-val-test
-  (testing "Given a max width of 3 a coordinate at -1 will wrap into 2."
-    (let [x -1
-          max-width 2
+  (testing "Given a value that's too low, return the max value."
+    (let [too-low -1
+          max-value 2
           expected 2]
-      (is (= expected (world-wrap-val x max-width))))))
+      (is (= expected (world-wrap-val too-low max-value)))))
+  
+  (testing "Given a value that's too high, return 0"
+    (let [too-high 3
+          max-value 2
+          expected 0]
+      (is (= expected (world-wrap-val too-high max-value))))))
+
+  (testing "Given a value that's between 0 and max-value, return the value."
+    (let [just-right 1
+          max-value 2
+          expected 1]
+      (is (= expected (world-wrap-val just-right max-value)))))
 

@@ -13,4 +13,6 @@
 
 (defn world-wrap-val [value max-value]
   (cond
-    (> 0 value) max-value))
+    (< value 0) max-value
+    (> value max-value) 0
+    :else value))
