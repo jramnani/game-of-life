@@ -25,3 +25,9 @@
         wrapped-xs (map #(world-wrap-val %1 max-width) xs)
         wrapped-ys (map #(world-wrap-val %1 max-height) ys)]
     (map #(vec [%1 %2]) wrapped-xs wrapped-ys)))
+
+
+(defn live [n alive?]
+  (or (= n 3)
+      (and (= n 2)
+           alive?)))

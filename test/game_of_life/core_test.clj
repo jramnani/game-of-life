@@ -42,3 +42,24 @@
           wrapped-neighbors (world-wrap-neighbors neighbors world)
           expected-neighbor [2,2]]
       (is (contains? (set wrapped-neighbors) expected-neighbor)))))
+
+
+(deftest live-test
+  (let [alive true
+        dead false]
+  (testing "A dead cell with two live neighbors is still dead."
+    (is (= dead (live 2 dead))))
+    
+  (testing "A dead cell with three live neighbors becomes alive."
+    (is (= alive (live 3 dead))))
+    
+  (testing "A live cell with two or three neighbors stays alive."
+    (is (= alive (live 2 alive)))
+    (is (= alive (live 3 alive))))
+    
+  (testing "A live cell with more than three neighbors dies of overpopulation."
+    (is (= dead (live 4 alive))))
+    
+  (testing "A live cell with fewer than two neighbors dies of underpopulation."
+    (is (= dead (live 1 alive))))))
+
