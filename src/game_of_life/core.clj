@@ -41,3 +41,12 @@
                     cell)]
     (assoc world :cells (set new-cells))))
 
+
+(defn -main []
+  (def height 20)
+  (def width 80)
+  (def random-cells (set (repeatedly (/ (* height width)
+                                   4)
+                                #(vec [(rand-int width) (rand-int height)]))))
+  (def world (create-world height width random-cells))
+  (display-world-to-terminal world step))
