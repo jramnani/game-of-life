@@ -33,3 +33,12 @@
           expected 1]
       (is (= expected (world-wrap-val just-right max-value)))))
 
+
+(deftest world-wrap-neighbors-test
+  (testing "Given a 3x3 world: cells on opposite sides of the board are neighbors."
+    (let [world (create-world 3 3 #{[0,0]})
+          x 0 y 0
+          neighbors (get-neighbors [x y])
+          wrapped-neighbors (world-wrap-neighbors neighbors world)
+          expected-neighbor [2,2]]
+      (is (contains? (set wrapped-neighbors) expected-neighbor)))))

@@ -16,3 +16,12 @@
     (< value 0) max-value
     (> value max-value) 0
     :else value))
+
+(defn world-wrap-neighbors [neighbors world]
+  (let [max-height (dec (:height world))
+        max-width (dec (:width world))
+        xs (map first neighbors)
+        ys (map second neighbors)
+        wrapped-xs (map #(world-wrap-val %1 max-width) xs)
+        wrapped-ys (map #(world-wrap-val %1 max-height) ys)]
+    (map #(vec [%1 %2]) wrapped-xs wrapped-ys)))
