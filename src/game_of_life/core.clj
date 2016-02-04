@@ -31,3 +31,13 @@
   (or (= n 3)
       (and (= n 2)
            alive?)))
+
+(defn step [world]
+  (let [cells (:cells world)
+        neighbors (mapcat get-neighbors cells)
+        wrapped-neighbors (world-wrap-neighbors neighbors world)
+        new-cells (for [[cell n] (frequencies wrapped-neighbors)
+                        :when (live n (contains? cells cell))]
+                    cell)]
+    (assoc world :cells (set new-cells))))
+
