@@ -10,3 +10,10 @@
              [-1 1]
              [-1 0 1])]
     [(+ dx x) (+ dy y)]))
+
+
+(defn world-wrap-val [value max-value]
+  (cond
+    (< value 0) max-value
+    (> value max-value) 0
+    :else value))
