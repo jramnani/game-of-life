@@ -1,5 +1,8 @@
 (ns game-of-life.world)
 
+;; This implementation of Conway's Game of Life world as inspired by:
+;; http://tech.puredanger.com/2011/11/17/clojure-and-processing/
+
 (defn create-world [height width cells]
   "A world is a map with keys, :height, :width, and :cells. The height and
   width are the dimensions of the world grid, and the cells are a set of [x,y]
