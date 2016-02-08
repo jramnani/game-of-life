@@ -1,5 +1,6 @@
 (ns game-of-life.core-test
   (:require [clojure.test :refer :all]
+            [game-of-life.world :refer :all]
             [game-of-life.core :refer :all]))
 
 
@@ -21,3 +22,10 @@
 
   (testing "A live cell with less than two neighbors dies of underpopulation."
     (is (= dead (live 1 alive))))))
+
+(deftest step-test
+  (testing "A blinker oscillates between a horizontal and vertical line."
+    (let [horizontal-blinker #{[1,1] [2,1] [3,1]}
+          vertical-blinker #{[2,0] [2,1] [2,2]}
+          world (create-world 5 5 horizontal-blinker)]
+      (is (= vertical-blinker (:cells (step world)))))))
