@@ -19,5 +19,5 @@
         neighbors (world-wrap-neighbors (mapcat get-neighbors cells)
                                         world)
         new-cells (apply-game-rules cells neighbors)]
-    (assoc world :cells (set new-cells))))
+    (assoc world :cells new-cells)))
 
