@@ -7,11 +7,17 @@
       (and (= n 2)
            alive?)))
 
+
+(defn apply-game-rules [cells neighbors]
+  (set (for [[cell n] (frequencies neighbors)
+        :when (live n (contains? cells cell))]
+    cell)))
+
+
 (defn step [world]
   (let [cells (:cells world)
         neighbors (world-wrap-neighbors (mapcat get-neighbors cells)
                                         world)
-        new-cells (for [[cell n] (frequencies neighbors)
-                        :when (live n (contains? cells cell))]
-                    cell)]
+        new-cells (apply-game-rules cells neighbors)]
     (assoc world :cells (set new-cells))))
+
