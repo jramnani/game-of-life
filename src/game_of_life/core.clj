@@ -3,6 +3,11 @@
             [game-of-life.world :refer :all]))
 
 
+(defn live [n alive?]
+  (or (= n 3)
+      (and (= n 2)
+           alive?)))
+
 (defn step [world]
   world)
 
