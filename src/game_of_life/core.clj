@@ -8,7 +8,7 @@
       (and (= n 2)
            alive?)))
 
-(defn apply-game-rules [cells neighbors]
+(defn next-cells [cells neighbors]
   (let [neighbors-per-cell (frequencies neighbors)]
     (set (for [[cell n] neighbors-per-cell
                :when (live n (contains? cells cell))]
