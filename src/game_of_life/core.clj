@@ -15,7 +15,11 @@
            cell))))
 
 (defn step [world]
-  world)
+  (let [cells (:cells world)
+        neighbors (world-wrap-neighbors (mapcat get-neighbors cells)
+                                        world)
+        new-cells (next-cells cells neighbors)]
+    (assoc world :cells new-cells)))
 
 
 (defn -main []
