@@ -9,12 +9,10 @@
            alive?)))
 
 (defn apply-game-rules [cells neighbors]
-  (let [neighbors-per-cell (frequencies neighbors)
-        live-cells (filter (fn [[cell n]]
-                             (live n (contains? cells cell)))
-                           neighbors-per-cell)
-        next-cells (keys live-cells)]
-    (set next-cells)))
+  (let [neighbors-per-cell (frequencies neighbors)]
+    (set (for [[cell n] neighbors-per-cell
+               :when (live n (contains? cells cell))]
+           cell))))
 
 (defn step [world]
   world)
