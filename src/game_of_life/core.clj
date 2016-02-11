@@ -2,9 +2,25 @@
   (:require [game-of-life.terminal-display :refer :all]
             [game-of-life.world :refer :all]))
 
+(defn live [n alive?]
+  (or (= n 3)
+      (and (= n 2)
+           alive?)))
+
+(defn next-cells [cells neighbors]
+  (let [neighbors-per-cell (frequencies neighbors)]
+    (set
+      (keys
+        (filter (fn [[cell n]] (live n (contains? cells cell)))
+                neighbors-per-cell)))))
+
 
 (defn step [world]
-  world)
+  (let [cells (:cells world)
+        neighbors (world-wrap-neighbors (mapcat get-neighbors cells)
+                                        world)
+        new-cells (next-cells cells neighbors)]
+    (assoc world :cells new-cells)))
 
 
 (defn -main []
