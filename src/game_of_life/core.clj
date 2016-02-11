@@ -8,11 +8,11 @@
            alive?)))
 
 (defn next-cells [cells neighbors]
-  (let [neighbors-per-cell (frequencies neighbors)]
-    (set
-      (keys
-        (filter (fn [[cell n]] (live n (contains? cells cell)))
-                neighbors-per-cell)))))
+  (let [neighbors-per-cell (frequencies neighbors)
+        new-cells (for [[cell n] neighbors-per-cell
+                        :when (live n (contains? cells cell))]
+                    cell)]
+    (set new-cells)))
 
 
 (defn step [world]
