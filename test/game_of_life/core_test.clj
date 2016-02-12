@@ -39,3 +39,11 @@
     (testing "A cell with more than three neighbors dies of overpopulation."
       (is (= dead (live 4 alive)))
       (is (= dead (live 4 dead))))))
+
+(deftest step-test
+  (testing "A blinker oscillates between a horizontal and vertical line."
+    (let [horizontal-blinker #{[0,1] [1,1] [2,1]}
+          vertical-blinker #{[1,0] [1,1] [1,2]}
+          world (create-world 5 5 horizontal-blinker)]
+      (is (= vertical-blinker (:cells (step world))))
+      (is (= horizontal-blinker (:cells (step (step world))))))))
