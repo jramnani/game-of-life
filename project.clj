@@ -6,4 +6,4 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ;; Terminal output for showing the game.
                  [clojure-lanterna "0.9.4"]]
-  :main game-of-life.core)
+  :main game-of-life.main)
