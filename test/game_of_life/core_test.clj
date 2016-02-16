@@ -4,6 +4,40 @@
             [game-of-life.core :refer :all]))
 
 
+(deftest next-cells-test
+  (testing "Given an empty set of cells and neighbors, return the empty.set"
+    (is (= #{} (next-cells #{} []))))
+
+  (testing "Given one cell and its neighbors, return the empty set."
+    (let [cells #{[1,1]}
+          neighbors (get-neighbors (first cells))]
+    (is (= #{} (next-cells cells neighbors)))))
+
+  (testing "A cell with three neighbors becomes alive."
+    (let [cells #{[0,1] [1,1] [2,1]}
+          neighbors (mapcat get-neighbors cells)
+          expected-cell [1,0]]
+      (is (contains? (next-cells cells neighbors)
+                     expected-cell)))))
+
+(deftest live-test
+  (let [alive true
+        dead false]
+    (testing "A cell with three neighbors becomes alive."
+      (is (= alive (live 3 alive))))
+
+    (testing "A live cell with two neighbors stays alive."
+      (is (= alive (live 2 alive))))
+
+    (testing "A dead cell with two neighbors stays dead."
+      (is (= dead (live 2 dead))))
+
+    (testing "A cell with more than three neighbors dies of overpopulation."
+      (is (= dead (live 4 alive)))
+      (is (= dead (live 4 dead))))
+
+    (testing "A cell with fewer than two neighbors dies of underpopulation."
+      (is (= dead (live 1 alive))))))
 ;(deftest step-test
   ;(testing "A blinker oscillates between a horizontal and vertical line."
     ;(let [horizontal-blinker #{[0,1] [1,1] [2,1]}
