@@ -3,6 +3,7 @@
   :url "https://github.com/jramnani/game-of-life"
   :license {:name "MIT License"
             :url "http://choosealicense.com/licenses/mit/"}
+  :aliases  {"coverage"  ["cloverage"]}
   :dependencies [[org.clojure/clojure "1.7.0"]
                  ;; Terminal output for showing the game.
                  [clojure-lanterna "0.9.4"]]
