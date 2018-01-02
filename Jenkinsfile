@@ -8,7 +8,7 @@ pipeline {
     }
     stage('Package') {
       steps {
-        sh 'lein uberjar '
+        sh 'lein uberjar'
         archiveArtifacts(artifacts: 'target/**/*.jar', onlyIfSuccessful: true)
       }
     }
